@@ -651,9 +651,142 @@
         .comm-content.active {
             display: block;
         }
+
+        /* Admin Panel */
+        .admin-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            color: rgba(255,255,255,0.6);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 1000;
+        }
+
+        .admin-toggle:hover {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            width: 280px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .admin-panel.open {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .admin-header {
+            background: #1a202c;
+            color: #fff;
+            padding: 16px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .admin-list {
+            padding: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .admin-item {
+            display: block;
+            width: 100%;
+            padding: 12px 14px;
+            border: none;
+            background: none;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.15s ease;
+            font-size: 0.85rem;
+            color: #4a5568;
+        }
+
+        .admin-item:hover {
+            background: #f1f5f9;
+        }
+
+        .admin-item-label {
+            display: block;
+            font-weight: 500;
+            color: #1a202c;
+            margin-bottom: 2px;
+        }
+
+        .admin-item-desc {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .admin-item.success .admin-item-label { color: #10b981; }
+        .admin-item.warning .admin-item-label { color: #f59e0b; }
+        .admin-item.error .admin-item-label { color: #ef4444; }
+
+        .admin-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 8px 0;
+        }
     </style>
 </head>
 <body>
+    <!-- Admin Panel -->
+    <button class="admin-toggle" onclick="toggleAdminPanel()" title="Preview all outcomes">⚙</button>
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">Preview Outcomes</div>
+        <div class="admin-list">
+            <button class="admin-item success" onclick="previewResult('success')">
+                <span class="admin-item-label">Standard Swap</span>
+                <span class="admin-item-desc">KV/KV nach VV → KV/KV nach VV (price higher)</span>
+            </button>
+            <div class="admin-divider"></div>
+            <button class="admin-item warning" onclick="previewResult('vv-to-kv')">
+                <span class="admin-item-label">VV → KV</span>
+                <span class="admin-item-desc">Conditional withdrawal right</span>
+            </button>
+            <button class="admin-item warning" onclick="previewResult('vv-to-vv')">
+                <span class="admin-item-label">VV → VV</span>
+                <span class="admin-item-desc">Conditional swap reservation</span>
+            </button>
+            <button class="admin-item warning" onclick="previewResult('kv-to-vv')">
+                <span class="admin-item-label">KV → VV</span>
+                <span class="admin-item-desc">Conditional swap-away right</span>
+            </button>
+            <div class="admin-divider"></div>
+            <button class="admin-item warning" onclick="previewResult('price-lower')">
+                <span class="admin-item-label">Price Lower</span>
+                <span class="admin-item-desc">Management approval required</span>
+            </button>
+            <button class="admin-item error" onclick="previewResult('secondary')">
+                <span class="admin-item-label">Secondary</span>
+                <span class="admin-item-desc">Not possible</span>
+            </button>
+            <div class="admin-divider"></div>
+            <button class="admin-item" onclick="restart(); toggleAdminPanel();">
+                <span class="admin-item-label">← Back to Start</span>
+                <span class="admin-item-desc">Reset to question flow</span>
+            </button>
+        </div>
+    </div>
+
     <div class="container">
         <div class="header">
             <h1>MYNE Homes Contract Swap Helpdesk</h1>
@@ -1366,6 +1499,60 @@
 
             // Go to step 1
             goToStep(1);
+        }
+
+        function toggleAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            panel.classList.toggle('open');
+        }
+
+        function previewResult(resultType) {
+            // Set dummy data for the summary
+            state.contract1Type = 'KV';
+            state.contract2Type = 'KV';
+            state.price1 = 50000;
+            state.price2 = 60000;
+
+            // Customize dummy data based on result type
+            if (resultType === 'vv-to-kv') {
+                state.contract1Type = 'VV';
+                state.contract2Type = 'KV';
+            } else if (resultType === 'vv-to-vv') {
+                state.contract1Type = 'VV';
+                state.contract2Type = 'VV';
+            } else if (resultType === 'kv-to-vv') {
+                state.contract1Type = 'KV';
+                state.contract2Type = 'VV';
+            } else if (resultType === 'price-lower') {
+                state.price1 = 60000;
+                state.price2 = 50000;
+            } else if (resultType === 'secondary') {
+                state.contract1Type = 'Secondary';
+                state.contract2Type = 'KV';
+            }
+
+            // Hide all steps and results
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.result').forEach(r => r.classList.remove('active'));
+
+            // Update progress bar
+            document.getElementById('progress').style.width = '100%';
+
+            // Show the selected result with summary
+            const resultId = 'result-' + resultType;
+            const summaryId = 'summary-' + resultType;
+
+            document.getElementById(summaryId).innerHTML = generateSummaryHTML();
+            document.getElementById(resultId).classList.add('active');
+
+            // For price-lower, also set the scenario text
+            if (resultType === 'price-lower') {
+                document.getElementById('price-lower-scenario').textContent =
+                    'This would normally be a standard swap (KV/KV nach VV to KV/KV nach VV), but requires management approval due to price difference.';
+            }
+
+            // Close admin panel
+            toggleAdminPanel();
         }
 
         function switchCommTab(button, contentId) {
