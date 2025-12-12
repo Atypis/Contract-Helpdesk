@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYNE Homes - Contract Swap Helpdesk</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #fff;
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #a0aec0;
+            font-size: 1rem;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e2e8f0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.4s ease;
+        }
+
+        .card-content {
+            padding: 40px;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-header {
+            margin-bottom: 30px;
+        }
+
+        .step-label {
+            display: inline-block;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            color: #1a202c;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            color: #718096;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f7fafc;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea10, #764ba210);
+        }
+
+        .option input {
+            display: none;
+        }
+
+        .option-radio {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #cbd5e0;
+            border-radius: 50%;
+            margin-right: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .option.selected .option-radio {
+            border-color: #667eea;
+            background: #667eea;
+        }
+
+        .option.selected .option-radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        .option-content h4 {
+            font-size: 1rem;
+            color: #1a202c;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .option-content p {
+            font-size: 0.85rem;
+            color: #718096;
+        }
+
+        .price-input {
+            margin-bottom: 30px;
+        }
+
+        .price-input label {
+            display: block;
+            font-size: 0.95rem;
+            color: #4a5568;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .price-input input {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 1.1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .price-input input:focus {
+            border-color: #667eea;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-back {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .btn-back:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-next {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: #fff;
+            margin-left: auto;
+        }
+
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-next:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-restart {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .btn-restart:hover {
+            background: #e2e8f0;
+        }
+
+        /* Results Styling */
+        .result {
+            display: none;
+        }
+
+        .result.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .result-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 2.5rem;
+        }
+
+        .result-icon.success {
+            background: linear-gradient(135deg, #10b98120, #10b98140);
+            color: #10b981;
+        }
+
+        .result-icon.warning {
+            background: linear-gradient(135deg, #f59e0b20, #f59e0b40);
+            color: #f59e0b;
+        }
+
+        .result-icon.error {
+            background: linear-gradient(135deg, #ef444420, #ef444440);
+            color: #ef4444;
+        }
+
+        .result-title {
+            text-align: center;
+            font-size: 1.6rem;
+            color: #1a202c;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .result-subtitle {
+            text-align: center;
+            color: #718096;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .result-details {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .result-details h4 {
+            font-size: 1rem;
+            color: #1a202c;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .result-details ul {
+            list-style: none;
+        }
+
+        .result-details li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        .result-details li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background: #667eea;
+            border-radius: 50%;
+        }
+
+        .action-box {
+            background: linear-gradient(135deg, #667eea10, #764ba210);
+            border: 1px solid #667eea30;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .action-box h4 {
+            color: #667eea;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .action-box p {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border: 1px solid #f59e0b40;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .warning-box h4 {
+            color: #b45309;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .warning-box p {
+            color: #92400e;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .summary-box {
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .summary-box h4 {
+            font-size: 0.9rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .summary-value {
+            color: #1a202c;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .info-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #f0f9ff;
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .info-note-icon {
+            color: #0284c7;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .info-note p {
+            color: #0369a1;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Withdrawal question styling */
+        .conditional-note {
+            background: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .conditional-note p {
+            color: #0369a1;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>MYNE Homes Contract Swap Helpdesk</h1>
+            <p>Determine swap eligibility and required actions</p>
+        </div>
+
+        <div class="card">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress" style="width: 0%"></div>
+            </div>
+
+            <div class="card-content">
+                <!-- Step 1: First Contract Type -->
+                <div class="step active" id="step1">
+                    <div class="step-header">
+                        <span class="step-label">First Contract (Existing)</span>
+                        <h2 class="step-title">What type of contract was concluded?</h2>
+                        <p class="step-description">Select the type of contract that the customer already has.</p>
+                    </div>
+
+                    <div class="options" id="contract1-type-options">
+                        <label class="option">
+                            <input type="radio" name="contract1-type" value="VV">
+                            <span class="option-radio"></span>
+                            <div class="option-content">
+                                <h4>Vorvertrag (Pre-Contract)</h4>
+                                <p>Still in pre-contract stage</p>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="contract1-type" value="KV_nach_VV">
+                            <span class="option-radio"></span>
+                            <div class="option-content">
+                                <h4>Kaufvertrag nach Vorvertrag</h4>
+                                <p>Pre-contract that has been converted to purchase contract</p>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="contract1-type" value="KV">
+                            <span class="option-radio"></span>
+                            <div class="option-content">
+                                <h4>Kaufvertrag (Direct)</h4>
+                                <p>Purchase contract concluded directly</p>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="contract1-type" value="Secondary">
+                            <span class="option-radio"></span>
+                            <div class="option-content">
+                                <h4>Secondary Contract</h4>
+                                <p>Secondary market contract</p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn btn-next" id="btn-step1" disabled>Continue</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Withdrawal Status (conditional) -->
+                <div class="step" id="step2">
+                    <div class="step-header">
+                        <span class="step-label">First Contract (Existing)</span>
+                        <h2 class="step-title">Has the withdrawal period lapsed?</h2>
+                        <p class="step-description">The 14-day withdrawal period status.</p>
+                    </div>
+
+                    <div class="conditional-note" id="withdrawal-note" style="display: none;">
+                        <p><strong>Note:</strong> This question is only relevant for first-time VV and first-time KV contracts.</p>
+                    </div>
+
+                    <div class="options" id="withdrawal-options">
+                        <label class="option">
+                            <input type="radio" name="withdrawal" value="yes">
+                            <span class="option-radio"></span>
+                            <div class="option-content">
+                                <h4>Yes, withdrawal period has lapsed</h4>
+                                <p>The 14-day period has passed</p>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="withdrawal" value="no">
+                            <span class="option-radio"></span>
+                            <div class="option-content">
+                                <h4>No, still within withdrawal period</h4>
+                                <p>Customer can still withdraw</p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn btn-back" onclick="goBack(2)">Back</button>
+                        <button class="btn btn-next" id="btn-step2" disabled>Continue</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: First Contract Price -->
+                <div class="step" id="step3">
+                    <div class="step-header">
+                        <span class="step-label">First Contract (Existing)</span>
+                        <h2 class="step-title">What is the price of the first contract?</h2>
+                        <p class="step-description">Enter the contract value in EUR.</p>
+                    </div>
+
+                    <div class="price-input">
+                        <label for="price1">Contract Price (EUR)</label>
+                        <input type="number" id="price1" placeholder="e.g. 50000" min="0">
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn btn-back" onclick="goBack(3)">Back</button>
+                        <button class="btn btn-next" id="btn-step3" disabled>Continue</button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Second Contract Type -->
+                <div class="step" id="step4">
+                    <div class="step-header">
+                        <span class="step-label">Second Contract (Target)</span>
+                        <h2 class="step-title">What type of contract shall be concluded?</h2>
+                        <p class="step-description">Select the contract type for the swap target.</p>
+                    </div>
+
+                    <div class="options" id="contract2-type-options">
+                        <label class="option">
+                            <input type="radio" name="contract2-type" value="VV">
+                            <span class="option-radio"></span>
+                            <div class="option-content">
+                                <h4>Vorvertrag (Pre-Contract)</h4>
+                                <p>New pre-contract</p>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="contract2-type" value="KV_nach_VV">
+                            <span class="option-radio"></span>
+                            <div class="option-content">
+                                <h4>Kaufvertrag nach Vorvertrag</h4>
+                                <p>Purchase contract after pre-contract</p>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="contract2-type" value="KV">
+                            <span class="option-radio"></span>
+                            <div class="option-content">
+                                <h4>Kaufvertrag (Direct)</h4>
+                                <p>Direct purchase contract</p>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="contract2-type" value="Secondary">
+                            <span class="option-radio"></span>
+                            <div class="option-content">
+                                <h4>Secondary Contract</h4>
+                                <p>Secondary market contract</p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn btn-back" onclick="goBack(4)">Back</button>
+                        <button class="btn btn-next" id="btn-step4" disabled>Continue</button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Second Contract Price -->
+                <div class="step" id="step5">
+                    <div class="step-header">
+                        <span class="step-label">Second Contract (Target)</span>
+                        <h2 class="step-title">What is the price of the second contract?</h2>
+                        <p class="step-description">Enter the target contract value in EUR.</p>
+                    </div>
+
+                    <div class="price-input">
+                        <label for="price2">Contract Price (EUR)</label>
+                        <input type="number" id="price2" placeholder="e.g. 60000" min="0">
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn btn-back" onclick="goBack(5)">Back</button>
+                        <button class="btn btn-next" id="btn-step5" disabled>Show Result</button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="result" id="result-success">
+                    <div class="result-icon success">✓</div>
+                    <h2 class="result-title">Congrats! This can be a Swap</h2>
+                    <p class="result-subtitle">The conditions for a standard swap are met.</p>
+
+                    <div class="summary-box" id="summary-success"></div>
+
+                    <div class="result-details">
+                        <h4>Required Contracts to Conclude:</h4>
+                        <ul>
+                            <li><strong>Swap Agreement</strong> — Document linking both contracts</li>
+                            <li><strong>Sales Contract</strong> — For the second (new) property share</li>
+                            <li><strong>Repurchasing Agreement</strong> — For MYNE to buy back the first share</li>
+                        </ul>
+                    </div>
+
+                    <div class="action-box">
+                        <h4>Next Steps</h4>
+                        <p>Proceed with preparing all three contracts. Ensure customer understands the swap process and timeline.</p>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn btn-restart" onclick="restart()">Start New Assessment</button>
+                    </div>
+                </div>
+
+                <div class="result" id="result-secondary">
+                    <div class="result-icon error">✕</div>
+                    <h2 class="result-title">This Cannot Be a Swap</h2>
+                    <p class="result-subtitle">Secondary contracts are not eligible for swaps.</p>
+
+                    <div class="summary-box" id="summary-secondary"></div>
+
+                    <div class="result-details">
+                        <h4>Reason:</h4>
+                        <ul>
+                            <li>MYNE does not offer swaps involving secondary contracts</li>
+                            <li>We cannot buy back shares at a price that has not been set by us</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>Customer Communication</h4>
+                        <p>Inform the customer that swap is not available for secondary market contracts. They may consider other options or a regular sale/purchase.</p>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn btn-restart" onclick="restart()">Start New Assessment</button>
+                    </div>
+                </div>
+
+                <!-- Result: VV to KV/KV nach VV -->
+                <div class="result" id="result-vv-to-kv">
+                    <div class="result-icon warning">⏳</div>
+                    <h2 class="result-title">This Cannot Yet Be a Swap</h2>
+                    <p class="result-subtitle">But special conditions can enable this.</p>
+
+                    <div class="summary-box" id="summary-vv-to-kv"></div>
+
+                    <div class="result-details">
+                        <h4>Situation:</h4>
+                        <ul>
+                            <li>First contract is still a Pre-Contract (Vorvertrag)</li>
+                            <li>Customer wants to purchase a full KV / KV nach VV</li>
+                        </ul>
+                    </div>
+
+                    <div class="action-box">
+                        <h4>Special Condition Available</h4>
+                        <p>The customer can receive an <strong>extended right to withdraw from the VV</strong> under the following conditions:</p>
+                    </div>
+
+                    <div class="result-details">
+                        <h4>Conditions for Extended Withdrawal:</h4>
+                        <ul>
+                            <li>Second KV must be purchased AND out of the withdrawal period</li>
+                            <li>Payment must be complete (contract is fully closed)</li>
+                            <li>Price for the second share must be higher than the first</li>
+                        </ul>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn btn-restart" onclick="restart()">Start New Assessment</button>
+                    </div>
+                </div>
+
+                <!-- Result: VV to VV -->
+                <div class="result" id="result-vv-to-vv">
+                    <div class="result-icon warning">⏳</div>
+                    <h2 class="result-title">This Cannot Yet Be a Swap</h2>
+                    <p class="result-subtitle">Both contracts are pre-contracts. Special conditions apply.</p>
+
+                    <div class="summary-box" id="summary-vv-to-vv"></div>
+
+                    <div class="result-details">
+                        <h4>Situation:</h4>
+                        <ul>
+                            <li>Both first and second contract are Vorverträge (Pre-Contracts)</li>
+                        </ul>
+                    </div>
+
+                    <div class="action-box">
+                        <h4>Special Conditions Required</h4>
+                        <p>Add a special condition to the <strong>second VV</strong>:</p>
+                    </div>
+
+                    <div class="result-details">
+                        <h4>Condition Details:</h4>
+                        <ul>
+                            <li>First VV has an extended right of withdrawal IF the second VV is converted into a KV nach VV and fully closed</li>
+                            <li>If the second VV is cancelled, the first VV remains completely valid</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>Important: Downpayment Required</h4>
+                        <p>Customer must make a downpayment for the second VV even though one was already made for the first. The first downpayment will be returned when the second contract is closed and the first is withdrawn.</p>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn btn-restart" onclick="restart()">Start New Assessment</button>
+                    </div>
+                </div>
+
+                <!-- Result: KV to VV -->
+                <div class="result" id="result-kv-to-vv">
+                    <div class="result-icon warning">⏳</div>
+                    <h2 class="result-title">This Cannot Yet Be a Swap</h2>
+                    <p class="result-subtitle">Special condition can enable a future swap.</p>
+
+                    <div class="summary-box" id="summary-kv-to-vv"></div>
+
+                    <div class="result-details">
+                        <h4>Situation:</h4>
+                        <ul>
+                            <li>First contract is a KV or KV nach VV</li>
+                            <li>Second contract is a Vorvertrag (Pre-Contract)</li>
+                        </ul>
+                    </div>
+
+                    <div class="action-box">
+                        <h4>Special Condition Available</h4>
+                        <p>Add a special condition to the <strong>VV</strong>:</p>
+                    </div>
+
+                    <div class="result-details">
+                        <h4>Condition Details:</h4>
+                        <ul>
+                            <li>Extended swap-away right for the first contract</li>
+                            <li>Activates when the second contract is fully closed as a KV nach VV</li>
+                        </ul>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn btn-restart" onclick="restart()">Start New Assessment</button>
+                    </div>
+                </div>
+
+                <!-- Result: Price Lower - Management Approval -->
+                <div class="result" id="result-price-lower">
+                    <div class="result-icon warning">⚠</div>
+                    <h2 class="result-title">Management Approval Required</h2>
+                    <p class="result-subtitle">The second contract price is lower than the first.</p>
+
+                    <div class="summary-box" id="summary-price-lower"></div>
+
+                    <div class="result-details">
+                        <h4>Situation:</h4>
+                        <ul>
+                            <li>Price of the first contract is higher than the second</li>
+                            <li>Standard swap conditions are NOT met</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>Special Approval Needed</h4>
+                        <p>All results shown for this contract combination are still possible, but require <strong>special approval by management</strong>.</p>
+                    </div>
+
+                    <div class="action-box" id="price-lower-action">
+                        <h4>Underlying Scenario</h4>
+                        <p id="price-lower-scenario"></p>
+                    </div>
+
+                    <div class="info-note">
+                        <span class="info-note-icon">ℹ</span>
+                        <p>Escalate this case to management with the full contract details before proceeding.</p>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn btn-restart" onclick="restart()">Start New Assessment</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        const state = {
+            currentStep: 1,
+            contract1Type: null,
+            withdrawalLapsed: null,
+            price1: null,
+            contract2Type: null,
+            price2: null
+        };
+
+        // Contract type labels
+        const contractLabels = {
+            'VV': 'Vorvertrag (Pre-Contract)',
+            'KV_nach_VV': 'Kaufvertrag nach Vorvertrag',
+            'KV': 'Kaufvertrag (Direct)',
+            'Secondary': 'Secondary Contract'
+        };
+
+        // Initialize event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            setupOptionListeners();
+            setupPriceListeners();
+            setupButtonListeners();
+        });
+
+        function setupOptionListeners() {
+            // Contract 1 type
+            document.querySelectorAll('input[name="contract1-type"]').forEach(input => {
+                input.addEventListener('change', (e) => {
+                    state.contract1Type = e.target.value;
+                    updateOptionSelection('contract1-type-options', e.target);
+                    document.getElementById('btn-step1').disabled = false;
+                });
+            });
+
+            // Withdrawal
+            document.querySelectorAll('input[name="withdrawal"]').forEach(input => {
+                input.addEventListener('change', (e) => {
+                    state.withdrawalLapsed = e.target.value === 'yes';
+                    updateOptionSelection('withdrawal-options', e.target);
+                    document.getElementById('btn-step2').disabled = false;
+                });
+            });
+
+            // Contract 2 type
+            document.querySelectorAll('input[name="contract2-type"]').forEach(input => {
+                input.addEventListener('change', (e) => {
+                    state.contract2Type = e.target.value;
+                    updateOptionSelection('contract2-type-options', e.target);
+                    document.getElementById('btn-step4').disabled = false;
+                });
+            });
+        }
+
+        function updateOptionSelection(containerId, selectedInput) {
+            const container = document.getElementById(containerId);
+            container.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            selectedInput.closest('.option').classList.add('selected');
+        }
+
+        function setupPriceListeners() {
+            document.getElementById('price1').addEventListener('input', (e) => {
+                state.price1 = parseFloat(e.target.value) || null;
+                document.getElementById('btn-step3').disabled = !state.price1;
+            });
+
+            document.getElementById('price2').addEventListener('input', (e) => {
+                state.price2 = parseFloat(e.target.value) || null;
+                document.getElementById('btn-step5').disabled = !state.price2;
+            });
+        }
+
+        function setupButtonListeners() {
+            document.getElementById('btn-step1').addEventListener('click', () => {
+                // Determine if we need withdrawal question
+                if (state.contract1Type === 'Secondary' || state.contract1Type === 'KV_nach_VV') {
+                    // Skip withdrawal question
+                    state.withdrawalLapsed = true; // Default for these types
+                    goToStep(3);
+                } else {
+                    goToStep(2);
+                }
+            });
+
+            document.getElementById('btn-step2').addEventListener('click', () => goToStep(3));
+            document.getElementById('btn-step3').addEventListener('click', () => goToStep(4));
+            document.getElementById('btn-step4').addEventListener('click', () => goToStep(5));
+            document.getElementById('btn-step5').addEventListener('click', () => showResult());
+        }
+
+        function goToStep(step) {
+            state.currentStep = step;
+
+            // Update progress
+            const totalSteps = 5;
+            const progress = ((step - 1) / totalSteps) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+
+            // Hide all steps
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+
+            // Show current step
+            document.getElementById('step' + step).classList.add('active');
+        }
+
+        function goBack(fromStep) {
+            if (fromStep === 2) {
+                goToStep(1);
+            } else if (fromStep === 3) {
+                // If we skipped step 2, go back to step 1
+                if (state.contract1Type === 'Secondary' || state.contract1Type === 'KV_nach_VV') {
+                    goToStep(1);
+                } else {
+                    goToStep(2);
+                }
+            } else {
+                goToStep(fromStep - 1);
+            }
+        }
+
+        function generateSummaryHTML() {
+            return `
+                <h4>Contract Summary</h4>
+                <div class="summary-row">
+                    <span class="summary-label">First Contract Type</span>
+                    <span class="summary-value">${contractLabels[state.contract1Type]}</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">First Contract Price</span>
+                    <span class="summary-value">€${state.price1.toLocaleString()}</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Second Contract Type</span>
+                    <span class="summary-value">${contractLabels[state.contract2Type]}</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Second Contract Price</span>
+                    <span class="summary-value">€${state.price2.toLocaleString()}</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Price Comparison</span>
+                    <span class="summary-value">${state.price2 > state.price1 ? 'Second is higher ✓' : 'First is higher ⚠'}</span>
+                </div>
+            `;
+        }
+
+        function showResult() {
+            // Update progress to 100%
+            document.getElementById('progress').style.width = '100%';
+
+            // Hide all steps
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.result').forEach(r => r.classList.remove('active'));
+
+            const c1 = state.contract1Type;
+            const c2 = state.contract2Type;
+            const priceHigher = state.price2 > state.price1;
+
+            // Check for secondary contracts first
+            if (c1 === 'Secondary' || c2 === 'Secondary') {
+                document.getElementById('summary-secondary').innerHTML = generateSummaryHTML();
+                document.getElementById('result-secondary').classList.add('active');
+                return;
+            }
+
+            // Check price - if first is higher, show management approval result
+            if (!priceHigher) {
+                document.getElementById('summary-price-lower').innerHTML = generateSummaryHTML();
+
+                // Determine underlying scenario for the action box
+                let scenario = '';
+                if ((c1 === 'KV' || c1 === 'KV_nach_VV') && (c2 === 'KV' || c2 === 'KV_nach_VV')) {
+                    scenario = 'This would normally be a standard swap (KV/KV nach VV to KV/KV nach VV), but requires management approval due to price difference.';
+                } else if (c1 === 'VV' && (c2 === 'KV' || c2 === 'KV_nach_VV')) {
+                    scenario = 'This is a VV to KV/KV nach VV scenario. Extended withdrawal rights could apply with management approval.';
+                } else if (c1 === 'VV' && c2 === 'VV') {
+                    scenario = 'This is a VV to VV scenario. Special conditions with extended withdrawal could apply with management approval.';
+                } else if ((c1 === 'KV' || c1 === 'KV_nach_VV') && c2 === 'VV') {
+                    scenario = 'This is a KV/KV nach VV to VV scenario. Extended swap-away rights could apply with management approval.';
+                }
+
+                document.getElementById('price-lower-scenario').textContent = scenario;
+                document.getElementById('result-price-lower').classList.add('active');
+                return;
+            }
+
+            // Standard swap: KV/KV nach VV to KV/KV nach VV with higher price
+            if ((c1 === 'KV' || c1 === 'KV_nach_VV') && (c2 === 'KV' || c2 === 'KV_nach_VV')) {
+                document.getElementById('summary-success').innerHTML = generateSummaryHTML();
+                document.getElementById('result-success').classList.add('active');
+                return;
+            }
+
+            // VV to KV/KV nach VV
+            if (c1 === 'VV' && (c2 === 'KV' || c2 === 'KV_nach_VV')) {
+                document.getElementById('summary-vv-to-kv').innerHTML = generateSummaryHTML();
+                document.getElementById('result-vv-to-kv').classList.add('active');
+                return;
+            }
+
+            // VV to VV
+            if (c1 === 'VV' && c2 === 'VV') {
+                document.getElementById('summary-vv-to-vv').innerHTML = generateSummaryHTML();
+                document.getElementById('result-vv-to-vv').classList.add('active');
+                return;
+            }
+
+            // KV/KV nach VV to VV
+            if ((c1 === 'KV' || c1 === 'KV_nach_VV') && c2 === 'VV') {
+                document.getElementById('summary-kv-to-vv').innerHTML = generateSummaryHTML();
+                document.getElementById('result-kv-to-vv').classList.add('active');
+                return;
+            }
+        }
+
+        function restart() {
+            // Reset state
+            state.currentStep = 1;
+            state.contract1Type = null;
+            state.withdrawalLapsed = null;
+            state.price1 = null;
+            state.contract2Type = null;
+            state.price2 = null;
+
+            // Reset UI
+            document.querySelectorAll('input[type="radio"]').forEach(input => {
+                input.checked = false;
+            });
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.getElementById('price1').value = '';
+            document.getElementById('price2').value = '';
+            document.querySelectorAll('.btn-next').forEach(btn => {
+                btn.disabled = true;
+            });
+
+            // Hide results
+            document.querySelectorAll('.result').forEach(r => r.classList.remove('active'));
+
+            // Go to step 1
+            goToStep(1);
+        }
+    </script>
+</body>
+</html>
