@@ -517,6 +517,140 @@
         .btn-copy.copied {
             background: #166534;
         }
+
+        /* New cleaner result sections */
+        .explainer-section {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .explainer-main h4 {
+            font-size: 1rem;
+            color: #1a202c;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .explainer-main p {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .explainer-why {
+            background: #f0f9ff;
+            border-left: 3px solid #0284c7;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            color: #0369a1;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .action-section {
+            background: linear-gradient(135deg, #667eea08, #764ba208);
+            border: 1px solid #667eea25;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .action-section h4 {
+            font-size: 1rem;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .action-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .action-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .action-item.warning-item {
+            border-color: #f59e0b40;
+            background: #fffbeb;
+        }
+
+        .action-number {
+            width: 28px;
+            height: 28px;
+            background: #667eea;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .action-item.warning-item .action-number {
+            background: #f59e0b;
+        }
+
+        .action-content strong {
+            display: block;
+            color: #1a202c;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .action-content p {
+            color: #64748b;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Language tabs for customer communication */
+        .comm-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .comm-tab {
+            padding: 8px 16px;
+            border: none;
+            background: #e2e8f0;
+            color: #64748b;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .comm-tab:hover {
+            background: #cbd5e1;
+        }
+
+        .comm-tab.active {
+            background: #22c55e;
+            color: #fff;
+        }
+
+        .comm-content {
+            display: none;
+        }
+
+        .comm-content.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -764,41 +898,52 @@
 
                     <div class="summary-box" id="summary-vv-to-kv"></div>
 
-                    <div class="result-details">
-                        <h4>What This Means</h4>
-                        <p style="color: #4a5568; line-height: 1.6; margin-bottom: 0;">
-                            The customer currently has a Vorvertrag (pre-contract) and wants to purchase a different property with a full Kaufvertrag.
-                            We can offer an <strong>extended right to withdraw from the first VV</strong> — but only once the second purchase is fully secured.
-                        </p>
+                    <div class="explainer-section">
+                        <div class="explainer-main">
+                            <h4>What This Means</h4>
+                            <p>
+                                The customer currently has a Vorvertrag (pre-contract) and wants to purchase a different property with a full Kaufvertrag.
+                                We can offer an <strong>extended right to withdraw from the first VV</strong> — but only once the second purchase is fully secured.
+                            </p>
+                            <div class="explainer-why">
+                                <strong>Why?</strong> Since MYNE already owns/operates the second property, there's no risk of it falling through. However, we still protect against payment default — the extended withdrawal only activates once the second KV is fully closed including payment.
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="info-note" style="margin-top: 0; margin-bottom: 24px;">
-                        <span class="info-note-icon">?</span>
-                        <p><strong>Why this structure?</strong> Since MYNE already owns/operates the second property, there's no risk of the property falling through. However, we still need to protect against the customer not fulfilling their payment obligations. The extended withdrawal only activates once the second KV is fully closed including payment.</p>
-                    </div>
-
-                    <div class="action-box">
-                        <h4>Required: Add Extended Withdrawal Clause to First VV</h4>
-                        <p>The customer's first Vorvertrag receives an extended withdrawal right under these conditions:</p>
-                    </div>
-
-                    <div class="result-details">
-                        <h4>Conditions for Extended Withdrawal:</h4>
-                        <ul>
-                            <li>Second KV must be purchased AND out of the withdrawal period</li>
-                            <li>Payment must be complete (contract is fully closed)</li>
-                            <li>Price for the second share is higher than the first (already confirmed ✓)</li>
-                        </ul>
+                    <div class="action-section">
+                        <h4>What You Need To Do</h4>
+                        <div class="action-item">
+                            <span class="action-number">1</span>
+                            <div class="action-content">
+                                <strong>Add extended withdrawal clause to first VV</strong>
+                                <p>Withdrawal right activates when: second KV is purchased, withdrawal period lapsed, and payment complete.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="customer-comm-box">
                         <h4>Customer Communication Template</h4>
-                        <div class="comm-template">
-                            <p>Gerne können wir Ihnen ermöglichen, den Kaufvertrag für [NEUES OBJEKT] abzuschließen und gleichzeitig ein erweitertes Rücktrittsrecht für Ihren bestehenden Vorvertrag zu erhalten.</p>
-                            <p>Sobald der neue Kaufvertrag vollständig abgeschlossen ist (Widerrufsfrist abgelaufen und Zahlung eingegangen), wird Ihr Rücktrittsrecht für den ersten Vorvertrag aktiviert und Sie können diesen rückabwickeln.</p>
-                            <p>So ist sichergestellt, dass Sie nahtlos von einer Immobilie zur anderen wechseln können.</p>
+                        <div class="comm-tabs">
+                            <button class="comm-tab active" onclick="switchCommTab(this, 'vv-kv-de')">Deutsch</button>
+                            <button class="comm-tab" onclick="switchCommTab(this, 'vv-kv-en')">English</button>
                         </div>
-                        <button class="btn-copy" onclick="copyToClipboard(this, 'vv-to-kv')">Copy to Clipboard</button>
+                        <div class="comm-content active" id="vv-kv-de">
+                            <div class="comm-template">
+                                <p>Gerne können wir Ihnen ermöglichen, den Kaufvertrag für [NEUES OBJEKT] abzuschließen und gleichzeitig ein erweitertes Rücktrittsrecht für Ihren bestehenden Vorvertrag zu erhalten.</p>
+                                <p>Sobald der neue Kaufvertrag vollständig abgeschlossen ist (Widerrufsfrist abgelaufen und Zahlung eingegangen), wird Ihr Rücktrittsrecht für den ersten Vorvertrag aktiviert und Sie können diesen rückabwickeln.</p>
+                                <p>So ist sichergestellt, dass Sie nahtlos von einer Immobilie zur anderen wechseln können.</p>
+                            </div>
+                            <button class="btn-copy" onclick="copyToClipboard(this, 'vv-kv-de')">Copy to Clipboard</button>
+                        </div>
+                        <div class="comm-content" id="vv-kv-en">
+                            <div class="comm-template">
+                                <p>We can offer you the option to conclude the purchase contract for [NEW PROPERTY] while also receiving an extended withdrawal right for your existing pre-contract.</p>
+                                <p>Once the new purchase contract is fully completed (withdrawal period expired and payment received), your withdrawal right for the first pre-contract will be activated, allowing you to unwind it.</p>
+                                <p>This ensures a seamless transition from one property to another.</p>
+                            </div>
+                            <button class="btn-copy" onclick="copyToClipboard(this, 'vv-kv-en')">Copy to Clipboard</button>
+                        </div>
                     </div>
 
                     <div class="buttons">
@@ -814,47 +959,62 @@
 
                     <div class="summary-box" id="summary-vv-to-vv"></div>
 
-                    <div class="result-details">
-                        <h4>What This Means</h4>
-                        <p style="color: #4a5568; line-height: 1.6; margin-bottom: 0;">
-                            In this case, we allow the customer to conclude a second VV which functions as a <strong>"Conditional Swap Reservation"</strong>.
-                            This means: if and once the second VV is converted into an actual KV nach VV and fully closed (property purchase completed, contract converted, payment made — everything),
-                            the customer gets the right to withdraw from / cancel their first contract.
-                        </p>
+                    <div class="explainer-section">
+                        <div class="explainer-main">
+                            <h4>What This Means</h4>
+                            <p>
+                                We allow the customer to conclude a second VV which functions as a <strong>"Conditional Swap Reservation"</strong>.
+                                If and once the second VV is converted into a KV nach VV and fully closed (property purchased, contract converted, payment complete),
+                                the customer gets the right to withdraw from their first contract.
+                            </p>
+                            <div class="explainer-why">
+                                <strong>Why?</strong> MYNE wants to enable swaps, but not to our economic detriment. If we allowed an immediate swap and the second VV doesn't go through (not enough interest, property falls through, etc.), we'd lose the first contract without recourse.
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="info-note" style="margin-top: 0; margin-bottom: 24px;">
-                        <span class="info-note-icon">?</span>
-                        <p><strong>Why this structure?</strong> MYNE wants to enable swaps, but not to our economic detriment. If we allowed an immediate swap and the second VV doesn't go through (e.g., not enough interest, property falls through, due diligence issues), MYNE would lose the first contract without recourse. The conditional logic protects against this risk.</p>
-                    </div>
-
-                    <div class="action-box">
-                        <h4>Required: Add Special Condition to Second VV</h4>
-                        <p>The second Vorvertrag must include a special clause that grants the customer an extended withdrawal right for the first VV. See details below.</p>
-                    </div>
-
-                    <div class="result-details">
-                        <h4>Clause Must Include:</h4>
-                        <ul>
-                            <li>First VV receives an extended right of withdrawal IF the second VV is converted into a KV nach VV and fully closed</li>
-                            <li>If the second VV is cancelled or doesn't proceed, the first VV remains completely valid and binding</li>
-                        </ul>
-                    </div>
-
-                    <div class="warning-box">
-                        <h4>Important: Second Downpayment Required</h4>
-                        <p>Customer must make a downpayment for the second VV even though one was already made for the first. The first downpayment will be returned when the second contract is fully closed and the first is withdrawn.</p>
+                    <div class="action-section">
+                        <h4>What You Need To Do</h4>
+                        <div class="action-item">
+                            <span class="action-number">1</span>
+                            <div class="action-content">
+                                <strong>Add special condition to second VV</strong>
+                                <p>Include clause: First VV receives extended withdrawal right IF second VV converts to KV nach VV and is fully closed. If second VV is cancelled, first VV remains valid.</p>
+                            </div>
+                        </div>
+                        <div class="action-item warning-item">
+                            <span class="action-number">2</span>
+                            <div class="action-content">
+                                <strong>Collect second downpayment</strong>
+                                <p>Customer must pay downpayment for second VV (first downpayment returns when second closes and first is withdrawn).</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="customer-comm-box">
                         <h4>Customer Communication Template</h4>
-                        <div class="comm-template">
-                            <p>Gerne können wir Ihnen ermöglichen, einen zweiten Vorvertrag für [OBJEKT] abzuschließen. Dieser funktioniert als eine Art "bedingte Swap-Reservierung".</p>
-                            <p>Das bedeutet konkret: Sobald der zweite Vorvertrag in einen vollständigen Kaufvertrag umgewandelt und komplett abgeschlossen ist (inkl. Zahlung), erhalten Sie das Recht, vom ersten Vorvertrag zurückzutreten.</p>
-                            <p>Bitte beachten Sie: Für den zweiten Vorvertrag ist eine erneute Anzahlung erforderlich. Ihre erste Anzahlung erhalten Sie selbstverständlich zurück, sobald der zweite Vertrag vollständig abgeschlossen und der erste rückabgewickelt ist.</p>
-                            <p>Falls der zweite Vorvertrag aus irgendeinem Grund nicht zustande kommt, bleibt Ihr erster Vorvertrag unverändert gültig.</p>
+                        <div class="comm-tabs">
+                            <button class="comm-tab active" onclick="switchCommTab(this, 'vv-vv-de')">Deutsch</button>
+                            <button class="comm-tab" onclick="switchCommTab(this, 'vv-vv-en')">English</button>
                         </div>
-                        <button class="btn-copy" onclick="copyToClipboard(this, 'vv-to-vv')">Copy to Clipboard</button>
+                        <div class="comm-content active" id="vv-vv-de">
+                            <div class="comm-template">
+                                <p>Gerne können wir Ihnen ermöglichen, einen zweiten Vorvertrag für [OBJEKT] abzuschließen. Dieser funktioniert als eine Art "bedingte Swap-Reservierung".</p>
+                                <p>Das bedeutet konkret: Sobald der zweite Vorvertrag in einen vollständigen Kaufvertrag umgewandelt und komplett abgeschlossen ist (inkl. Zahlung), erhalten Sie das Recht, vom ersten Vorvertrag zurückzutreten.</p>
+                                <p>Bitte beachten Sie: Für den zweiten Vorvertrag ist eine erneute Anzahlung erforderlich. Ihre erste Anzahlung erhalten Sie selbstverständlich zurück, sobald der zweite Vertrag vollständig abgeschlossen und der erste rückabgewickelt ist.</p>
+                                <p>Falls der zweite Vorvertrag aus irgendeinem Grund nicht zustande kommt, bleibt Ihr erster Vorvertrag unverändert gültig.</p>
+                            </div>
+                            <button class="btn-copy" onclick="copyToClipboard(this, 'vv-vv-de')">Copy to Clipboard</button>
+                        </div>
+                        <div class="comm-content" id="vv-vv-en">
+                            <div class="comm-template">
+                                <p>We can offer you the option to conclude a second pre-contract for [PROPERTY]. This functions as a "conditional swap reservation".</p>
+                                <p>Specifically, this means: Once the second pre-contract is converted into a full purchase contract and completely closed (including payment), you will receive the right to withdraw from your first pre-contract.</p>
+                                <p>Please note: A deposit is required for the second pre-contract, even though you already made one for the first. Your original deposit will be returned once the second contract is fully closed and the first is unwound.</p>
+                                <p>If the second pre-contract does not proceed for any reason, your first pre-contract remains fully valid and unchanged.</p>
+                            </div>
+                            <button class="btn-copy" onclick="copyToClipboard(this, 'vv-vv-en')">Copy to Clipboard</button>
+                        </div>
                     </div>
 
                     <div class="buttons">
@@ -870,41 +1030,52 @@
 
                     <div class="summary-box" id="summary-kv-to-vv"></div>
 
-                    <div class="result-details">
-                        <h4>What This Means</h4>
-                        <p style="color: #4a5568; line-height: 1.6; margin-bottom: 0;">
-                            The customer already owns a share (KV/KV nach VV) and now wants to reserve a different property via Vorvertrag.
-                            We can include an <strong>extended swap-away right</strong> in the new VV — this allows the customer to swap out of their first property once the second purchase is fully completed.
-                        </p>
+                    <div class="explainer-section">
+                        <div class="explainer-main">
+                            <h4>What This Means</h4>
+                            <p>
+                                The customer already owns a share (KV/KV nach VV) and now wants to reserve a different property via Vorvertrag.
+                                We can include an <strong>extended swap-away right</strong> in the new VV — this allows the customer to swap out of their first property once the second purchase is fully completed.
+                            </p>
+                            <div class="explainer-why">
+                                <strong>Why?</strong> MYNE won't buy back the first share until the second VV converts to a full KV and is completely closed. This protects against repurchasing when the new property might not go through (not enough interest, due diligence issues, payment default).
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="info-note" style="margin-top: 0; margin-bottom: 24px;">
-                        <span class="info-note-icon">?</span>
-                        <p><strong>Why this structure?</strong> MYNE won't buy back the first share until the second VV converts to a full KV and is completely closed. This protects MYNE from repurchasing a share when the new property might not go through (e.g., not enough interest, due diligence issues, customer payment default). Only when everything is secured does the swap-away right activate.</p>
-                    </div>
-
-                    <div class="action-box">
-                        <h4>Required: Add Conditional Swap-Away Right to New VV</h4>
-                        <p>The new Vorvertrag must include a clause granting:</p>
-                    </div>
-
-                    <div class="result-details">
-                        <h4>Condition Details:</h4>
-                        <ul>
-                            <li>Extended swap-away right for the first contract (KV)</li>
-                            <li>Activates when the second VV is converted to KV nach VV and fully closed (including payment)</li>
-                            <li>Upon activation: MYNE repurchases the first share and the swap is completed</li>
-                        </ul>
+                    <div class="action-section">
+                        <h4>What You Need To Do</h4>
+                        <div class="action-item">
+                            <span class="action-number">1</span>
+                            <div class="action-content">
+                                <strong>Add conditional swap-away right to new VV</strong>
+                                <p>Include clause: Swap-away right for first KV activates when second VV converts to KV nach VV and is fully closed. Upon activation, MYNE repurchases the first share.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="customer-comm-box">
                         <h4>Customer Communication Template</h4>
-                        <div class="comm-template">
-                            <p>Gerne können wir Ihnen ermöglichen, einen Vorvertrag für [NEUES OBJEKT] abzuschließen. In diesem Vorvertrag wird ein bedingtes Swap-Recht für Ihren bestehenden Anteil an [ERSTES OBJEKT] verankert.</p>
-                            <p>Das bedeutet: Sobald der Vorvertrag für das neue Objekt in einen vollständigen Kaufvertrag umgewandelt und komplett abgeschlossen ist (inkl. Zahlung), wird Ihr Swap-Recht aktiviert. MYNE kauft dann Ihren ersten Anteil zurück und der Wechsel ist abgeschlossen.</p>
-                            <p>Sollte das neue Objekt aus irgendeinem Grund nicht zustande kommen, behalten Sie einfach Ihren bestehenden Anteil — es ändert sich nichts.</p>
+                        <div class="comm-tabs">
+                            <button class="comm-tab active" onclick="switchCommTab(this, 'kv-vv-de')">Deutsch</button>
+                            <button class="comm-tab" onclick="switchCommTab(this, 'kv-vv-en')">English</button>
                         </div>
-                        <button class="btn-copy" onclick="copyToClipboard(this, 'kv-to-vv')">Copy to Clipboard</button>
+                        <div class="comm-content active" id="kv-vv-de">
+                            <div class="comm-template">
+                                <p>Gerne können wir Ihnen ermöglichen, einen Vorvertrag für [NEUES OBJEKT] abzuschließen. In diesem Vorvertrag wird ein bedingtes Swap-Recht für Ihren bestehenden Anteil an [ERSTES OBJEKT] verankert.</p>
+                                <p>Das bedeutet: Sobald der Vorvertrag für das neue Objekt in einen vollständigen Kaufvertrag umgewandelt und komplett abgeschlossen ist (inkl. Zahlung), wird Ihr Swap-Recht aktiviert. MYNE kauft dann Ihren ersten Anteil zurück und der Wechsel ist abgeschlossen.</p>
+                                <p>Sollte das neue Objekt aus irgendeinem Grund nicht zustande kommen, behalten Sie einfach Ihren bestehenden Anteil — es ändert sich nichts.</p>
+                            </div>
+                            <button class="btn-copy" onclick="copyToClipboard(this, 'kv-vv-de')">Copy to Clipboard</button>
+                        </div>
+                        <div class="comm-content" id="kv-vv-en">
+                            <div class="comm-template">
+                                <p>We can offer you the option to conclude a pre-contract for [NEW PROPERTY]. This pre-contract will include a conditional swap right for your existing share in [FIRST PROPERTY].</p>
+                                <p>This means: Once the pre-contract for the new property is converted into a full purchase contract and completely closed (including payment), your swap right will be activated. MYNE will then repurchase your first share and the swap is complete.</p>
+                                <p>If the new property does not proceed for any reason, you simply keep your existing share — nothing changes.</p>
+                            </div>
+                            <button class="btn-copy" onclick="copyToClipboard(this, 'kv-vv-en')">Copy to Clipboard</button>
+                        </div>
                     </div>
 
                     <div class="buttons">
@@ -1197,10 +1368,23 @@
             goToStep(1);
         }
 
-        function copyToClipboard(button, templateId) {
-            // Find the comm-template div that's a sibling of this button
+        function switchCommTab(button, contentId) {
+            // Get the parent comm-box
             const commBox = button.closest('.customer-comm-box');
-            const template = commBox.querySelector('.comm-template');
+
+            // Update tab states
+            commBox.querySelectorAll('.comm-tab').forEach(tab => tab.classList.remove('active'));
+            button.classList.add('active');
+
+            // Update content visibility
+            commBox.querySelectorAll('.comm-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(contentId).classList.add('active');
+        }
+
+        function copyToClipboard(button, templateId) {
+            // Find the comm-template div that's a sibling of this button (in the same comm-content)
+            const commContent = button.closest('.comm-content') || button.closest('.customer-comm-box');
+            const template = commContent.querySelector('.comm-template');
 
             // Get all paragraph text
             const paragraphs = template.querySelectorAll('p');
