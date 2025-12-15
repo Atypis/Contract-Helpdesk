@@ -803,8 +803,8 @@
                 <div class="step active" id="step1">
                     <div class="step-header">
                         <span class="step-label">First Contract (Existing)</span>
-                        <h2 class="step-title">What type of contract was concluded?</h2>
-                        <p class="step-description">Select the type of contract that the customer already has.</p>
+                        <h2 class="step-title">What is the current status of the contract that was concluded first?</h2>
+                        <p class="step-description">Please select the current status of the contract that the customer has previously signed. If it was a pre-contract at the time, check if it has already been converted into a full contract after pre-contract.</p>
                     </div>
 
                     <div class="options" id="contract1-type-options">
@@ -812,7 +812,7 @@
                             <input type="radio" name="contract1-type" value="VV">
                             <span class="option-radio"></span>
                             <div class="option-content">
-                                <h4>Vorvertrag (Pre-Contract)</h4>
+                                <h4>Pre-Contract / Vorvertrag</h4>
                                 <p>Still in pre-contract stage</p>
                             </div>
                         </label>
@@ -820,7 +820,7 @@
                             <input type="radio" name="contract1-type" value="KV_nach_VV">
                             <span class="option-radio"></span>
                             <div class="option-content">
-                                <h4>Kaufvertrag nach Vorvertrag</h4>
+                                <h4>Purchase Contract after Pre-Contract / KV nach VV</h4>
                                 <p>Pre-contract that has been converted to purchase contract</p>
                             </div>
                         </label>
@@ -828,7 +828,7 @@
                             <input type="radio" name="contract1-type" value="KV">
                             <span class="option-radio"></span>
                             <div class="option-content">
-                                <h4>Kaufvertrag (Direct)</h4>
+                                <h4>Purchase Contract / Kaufvertrag</h4>
                                 <p>Purchase contract concluded directly</p>
                             </div>
                         </label>
@@ -836,7 +836,7 @@
                             <input type="radio" name="contract1-type" value="Secondary">
                             <span class="option-radio"></span>
                             <div class="option-content">
-                                <h4>Secondary Contract</h4>
+                                <h4>Secondary Contract / Zweitmarkt-Verkauf</h4>
                                 <p>Secondary market contract</p>
                             </div>
                         </label>
@@ -852,7 +852,7 @@
                     <div class="step-header">
                         <span class="step-label">First Contract (Existing)</span>
                         <h2 class="step-title">Has the withdrawal period lapsed?</h2>
-                        <p class="step-description">The 14-day withdrawal period status.</p>
+                        <p class="step-description">Check the status of the standard or extended withdrawal period.</p>
                     </div>
 
                     <div class="conditional-note" id="withdrawal-note" style="display: none;">
@@ -865,7 +865,6 @@
                             <span class="option-radio"></span>
                             <div class="option-content">
                                 <h4>Yes, withdrawal period has lapsed</h4>
-                                <p>The 14-day period has passed</p>
                             </div>
                         </label>
                         <label class="option">
@@ -873,7 +872,6 @@
                             <span class="option-radio"></span>
                             <div class="option-content">
                                 <h4>No, still within withdrawal period</h4>
-                                <p>Customer can still withdraw</p>
                             </div>
                         </label>
                     </div>
@@ -907,8 +905,8 @@
                 <div class="step" id="step4">
                     <div class="step-header">
                         <span class="step-label">Second Contract (Target)</span>
-                        <h2 class="step-title">What type of contract shall be concluded?</h2>
-                        <p class="step-description">Select the contract type for the swap target.</p>
+                        <h2 class="step-title">What type of contract shall now be concluded?</h2>
+                        <p class="step-description">Select what type of contract the co-owner wants to sign now.</p>
                     </div>
 
                     <div class="options" id="contract2-type-options">
@@ -916,7 +914,7 @@
                             <input type="radio" name="contract2-type" value="VV">
                             <span class="option-radio"></span>
                             <div class="option-content">
-                                <h4>Vorvertrag (Pre-Contract)</h4>
+                                <h4>Pre-Contract / Vorvertrag</h4>
                                 <p>New pre-contract</p>
                             </div>
                         </label>
@@ -924,7 +922,7 @@
                             <input type="radio" name="contract2-type" value="KV_nach_VV">
                             <span class="option-radio"></span>
                             <div class="option-content">
-                                <h4>Kaufvertrag nach Vorvertrag</h4>
+                                <h4>Purchase Contract after Pre-Contract / KV nach VV</h4>
                                 <p>Purchase contract after pre-contract</p>
                             </div>
                         </label>
@@ -932,7 +930,7 @@
                             <input type="radio" name="contract2-type" value="KV">
                             <span class="option-radio"></span>
                             <div class="option-content">
-                                <h4>Kaufvertrag (Direct)</h4>
+                                <h4>Purchase Contract / Kaufvertrag</h4>
                                 <p>Direct purchase contract</p>
                             </div>
                         </label>
@@ -940,7 +938,7 @@
                             <input type="radio" name="contract2-type" value="Secondary">
                             <span class="option-radio"></span>
                             <div class="option-content">
-                                <h4>Secondary Contract</h4>
+                                <h4>Secondary Contract / Zweitmarkt-Verkauf</h4>
                                 <p>Secondary market contract</p>
                             </div>
                         </label>
@@ -983,8 +981,8 @@
                         <h4>Required Contracts to Conclude:</h4>
                         <ul>
                             <li><strong>Swap Agreement</strong> — Document linking both contracts</li>
-                            <li><strong>Sales Contract</strong> — For the second (new) property share</li>
-                            <li><strong>Repurchasing Agreement</strong> — For MYNE to buy back the first share</li>
+                            <li id="success-second-contract"><strong>Purchase Contract</strong> — For the second (new) property share, including Accession Agreement (Beitrittsvertrag) and Partnership Agreement (Gesellschaftsvertrag) for the new property</li>
+                            <li><strong>Repurchase Agreement</strong> — For MYNE to buy back the first share</li>
                         </ul>
                     </div>
 
@@ -1027,7 +1025,7 @@
                 <div class="result" id="result-vv-to-kv">
                     <div class="result-icon warning">⏳</div>
                     <h2 class="result-title">This Cannot Yet Be a Swap</h2>
-                    <p class="result-subtitle">Customer has a VV but wants to purchase a different property outright. Conditional withdrawal is possible.</p>
+                    <p class="result-subtitle">Customer has a Pre-Contract (Vorvertrag) and wants to purchase a different property outright. Conditional right to cancel the pre-contract is possible.</p>
 
                     <div class="summary-box" id="summary-vv-to-kv"></div>
 
@@ -1036,10 +1034,10 @@
                             <h4>What This Means</h4>
                             <p>
                                 The customer currently has a Vorvertrag (pre-contract) and wants to purchase a different property with a full Kaufvertrag.
-                                We can offer an <strong>extended right to withdraw from the first VV</strong> — but only once the second purchase is fully secured.
+                                We can offer an <strong>extended right to cancel the first pre-contract</strong> — but only once the second purchase is fully secured.
                             </p>
                             <div class="explainer-why">
-                                <strong>Why?</strong> Since MYNE already owns/operates the second property, there's no risk of it falling through. However, we still protect against payment default — the extended withdrawal only activates once the second KV is fully closed including payment.
+                                <strong>Why?</strong> Since MYNE already owns/operates the second property, there's no risk of it falling through. However, we still protect against payment default — the extended cancellation right only activates once the second KV is fully closed including payment.
                             </div>
                         </div>
                     </div>
@@ -1049,8 +1047,15 @@
                         <div class="action-item">
                             <span class="action-number">1</span>
                             <div class="action-content">
-                                <strong>Add extended withdrawal clause to first VV</strong>
-                                <p>Withdrawal right activates when: second KV is purchased, withdrawal period lapsed, and payment complete.</p>
+                                <strong>Add extended cancellation clause to the new Purchase Contract</strong>
+                                <p>The special condition is added to the new purchase agreement but grants the customer the right to cancel the first pre-contract. Cancellation right activates when: second KV is purchased, withdrawal period lapsed, and payment complete.</p>
+                            </div>
+                        </div>
+                        <div class="action-item warning-item">
+                            <span class="action-number">2</span>
+                            <div class="action-content">
+                                <strong>Update Salesforce for the Pre-Contract</strong>
+                                <p>Add the extended cancellation right information to the first pre-contract record in Salesforce (not to the new purchase contract).</p>
                             </div>
                         </div>
                     </div>
@@ -1071,8 +1076,8 @@
                         </div>
                         <div class="comm-content" id="vv-kv-en">
                             <div class="comm-template">
-                                <p>We can offer you the option to conclude the purchase contract for [NEW PROPERTY] while also receiving an extended withdrawal right for your existing pre-contract.</p>
-                                <p>Once the new purchase contract is fully completed (withdrawal period expired and payment received), your withdrawal right for the first pre-contract will be activated, allowing you to unwind it.</p>
+                                <p>We can offer you the option to conclude the purchase contract for [NEW PROPERTY] while also receiving an extended cancellation right for your existing pre-contract.</p>
+                                <p>Once the new purchase contract is fully completed (withdrawal period expired and payment received), your cancellation right for the first pre-contract will be activated, allowing you to unwind it.</p>
                                 <p>This ensures a seamless transition from one property to another.</p>
                             </div>
                             <button class="btn-copy" onclick="copyToClipboard(this, 'vv-kv-en')">Copy to Clipboard</button>
@@ -1098,7 +1103,7 @@
                             <p>
                                 We allow the customer to conclude a second VV which functions as a <strong>"Conditional Swap Reservation"</strong>.
                                 If and once the second VV is converted into a KV nach VV and fully closed (property purchased, contract converted, payment complete),
-                                the customer gets the right to withdraw from their first contract.
+                                the customer gets the right to cancel their first pre-contract.
                             </p>
                             <div class="explainer-why">
                                 <strong>Why?</strong> MYNE wants to enable swaps, but not to our economic detriment. If we allowed an immediate swap and the second VV doesn't go through (not enough interest, property falls through, etc.), we'd lose the first contract without recourse.
@@ -1111,15 +1116,22 @@
                         <div class="action-item">
                             <span class="action-number">1</span>
                             <div class="action-content">
-                                <strong>Add special condition to second VV</strong>
-                                <p>Include clause: First VV receives extended withdrawal right IF second VV converts to KV nach VV and is fully closed. If second VV is cancelled, first VV remains valid.</p>
+                                <strong>Add special condition to the second VV</strong>
+                                <p>Include clause in the second pre-contract: Customer receives extended cancellation right for the first pre-contract IF second VV converts to KV nach VV and is fully closed. If second VV is cancelled, first VV remains valid.</p>
                             </div>
                         </div>
                         <div class="action-item warning-item">
                             <span class="action-number">2</span>
                             <div class="action-content">
+                                <strong>Update Salesforce for the First Pre-Contract</strong>
+                                <p>Add the extended cancellation right information to the first pre-contract record in Salesforce (the condition is in the second VV, but the cancellation right applies to the first).</p>
+                            </div>
+                        </div>
+                        <div class="action-item warning-item">
+                            <span class="action-number">3</span>
+                            <div class="action-content">
                                 <strong>Collect second downpayment</strong>
-                                <p>Customer must pay downpayment for second VV (first downpayment returns when second closes and first is withdrawn).</p>
+                                <p>Customer must pay downpayment for second VV (first downpayment returns when second closes and first is cancelled).</p>
                             </div>
                         </div>
                     </div>
@@ -1142,8 +1154,8 @@
                         <div class="comm-content" id="vv-vv-en">
                             <div class="comm-template">
                                 <p>We can offer you the option to conclude a second pre-contract for [PROPERTY]. This functions as a "conditional swap reservation".</p>
-                                <p>Specifically, this means: Once the second pre-contract is converted into a full purchase contract and completely closed (including payment), you will receive the right to withdraw from your first pre-contract.</p>
-                                <p>Please note: A deposit is required for the second pre-contract, even though you already made one for the first. Your original deposit will be returned once the second contract is fully closed and the first is unwound.</p>
+                                <p>Specifically, this means: Once the second pre-contract is converted into a full purchase contract and completely closed (including payment), you will receive the right to cancel your first pre-contract.</p>
+                                <p>Please note: A deposit is required for the second pre-contract, even though you already made one for the first. Your original deposit will be returned once the second contract is fully closed and the first is cancelled.</p>
                                 <p>If the second pre-contract does not proceed for any reason, your first pre-contract remains fully valid and unchanged.</p>
                             </div>
                             <button class="btn-copy" onclick="copyToClipboard(this, 'vv-vv-en')">Copy to Clipboard</button>
@@ -1269,10 +1281,10 @@
 
         // Contract type labels
         const contractLabels = {
-            'VV': 'Vorvertrag (Pre-Contract)',
-            'KV_nach_VV': 'Kaufvertrag nach Vorvertrag',
-            'KV': 'Kaufvertrag (Direct)',
-            'Secondary': 'Secondary Contract'
+            'VV': 'Pre-Contract / Vorvertrag',
+            'KV_nach_VV': 'Purchase Contract after Pre-Contract / KV nach VV',
+            'KV': 'Purchase Contract / Kaufvertrag',
+            'Secondary': 'Secondary Contract / Zweitmarkt-Verkauf'
         };
 
         // Initialize event listeners
@@ -1446,6 +1458,15 @@
             // Standard swap: KV/KV nach VV to KV/KV nach VV with higher price
             if ((c1 === 'KV' || c1 === 'KV_nach_VV') && (c2 === 'KV' || c2 === 'KV_nach_VV')) {
                 document.getElementById('summary-success').innerHTML = generateSummaryHTML();
+
+                // Update second contract text based on contract type
+                const secondContractEl = document.getElementById('success-second-contract');
+                if (c2 === 'KV') {
+                    secondContractEl.innerHTML = '<strong>Purchase Contract</strong> — For the second (new) property share, including Accession Agreement (Beitrittsvertrag) and Partnership Agreement (Gesellschaftsvertrag) for the new property';
+                } else {
+                    secondContractEl.innerHTML = '<strong>Purchase Contract after Pre-Contract</strong> — For the second (new) property share, including Accession Agreement (Beitrittsvertrag) and Partnership Agreement (Gesellschaftsvertrag) for the new property';
+                }
+
                 document.getElementById('result-success').classList.add('active');
                 return;
             }
